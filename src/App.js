@@ -6,7 +6,7 @@ function App() {
     name: "",
     email: "",
     password: "",
-    password_confirmation: ""
+    password_confirmation: "",
   });
 
   const [inputs, setInputs] = useState([
@@ -16,7 +16,7 @@ function App() {
       type: "text",
       error: false,
       name: "name",
-      error_msg: "blah blah blah"
+      error_msg: "blah blah blah",
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ function App() {
       type: "email",
       error: false,
       name: "email",
-      error_msg: "blah blah blah"
+      error_msg: "blah blah blah",
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ function App() {
       type: "text",
       error: false,
       name: "password",
-      error_msg: "blah blah blah"
+      error_msg: "blah blah blah",
     },
     {
       id: 4,
@@ -40,8 +40,8 @@ function App() {
       type: "text",
       error: false,
       name: "password_confirmation",
-      error_msg: "blah blah blah"
-    }
+      error_msg: "blah blah blah",
+    },
   ]);
 
   function handleChange(e, inp) {
@@ -51,9 +51,23 @@ function App() {
     switch (inp.name) {
       case "name":
         if (values[inp.name].length < 4) {
-          setInputs([...inputs, { ...inp, error: true }]);
+          setInputs((prevInp) =>
+            prevInp.map((inpObj) => {
+              if (inpObj.id === inp.id) {
+                return { ...inp, error: true };
+              }
+              return inpObj;
+            })
+          );
         } else {
-          setInputs([...inputs, { ...inp, error: false }]);
+          setInputs((prevInp) =>
+            prevInp.map((inpObj) => {
+              if (inpObj.id === inp.id) {
+                return { ...inp, error: false };
+              }
+              return inpObj;
+            })
+          );
         }
         break;
       case "email":
