@@ -45,12 +45,13 @@ function App() {
   ]);
 
   function handleChange(e, inp) {
-    console.log(inp);
-
-    setValues({ ...values, [inp.name]: e.target.value });
+    
+    setValues(prevState => {
+      return {...prevState, [inp.name]: e.target.value}
+    });
     switch (inp.name) {
       case "name":
-        if (values[inp.name].length < 4) {
+        if (values[inp.name].length < 3) {
           setInputs((prevInp) =>
             prevInp.map((inpObj) => {
               if (inpObj.id === inp.id) {
